@@ -1,3 +1,10 @@
+### Structure ###
+*.cif
+*.cif.gz
+*.pdb
+*.pdb.gz
+*.pdb1
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
