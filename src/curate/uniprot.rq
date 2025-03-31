@@ -1,0 +1,29 @@
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT (?protein AS ?uniprot)
+    (GROUP_CONCAT(DISTINCT ?entry; SEPARATOR=", ") AS ?rcsb)
+    (GROUP_CONCAT(DISTINCT ?alphafold; SEPARATOR=", ") AS ?alphafold)
+    (GROUP_CONCAT(DISTINCT ?annotationtype; SEPARATOR=", ") AS ?annotations)
+
+WHERE {
+    VALUES (?entry) { $entries }
+    BIND (IRI(CONCAT("http://purl.uniprot.org/pdbsum/", ?entry)) AS ?pdb)
+
+    ?protein a up:Protein .
+    ?protein rdfs:seeAlso ?pdb .
+    ?pdb up:database <http://purl.uniprot.org/database/PDBsum> .
+
+    OPTIONAL { 
+        ?protein rdfs:seeAlso ?alphafold . 
+        ?alphafold up:database <http://purl.uniprot.org/database/AlphaFoldDB> . 
+    }
+
+    OPTIONAL {
+        ?protein up:annotation ?annotation . 
+        ?annotation rdf:type ?annotationtype .
+    }
+}
+
+GROUP BY ?protein

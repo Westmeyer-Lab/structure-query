@@ -1,0 +1,91 @@
+{
+    "output": "results/",
+    "scripts": "src/",
+    "search": {
+        "query": [
+            {
+                "label": "membrane",
+                "description": "Structure must belong to a membrane protein as annotated by common membrane protein databases",
+                "parameters": {
+                    "attribute": "rcsb_polymer_entity_annotation.type",
+                    "operator": "in",
+                    "value": [
+                        "PDBTM",
+                        "MemProtMD",
+                        "OPM"
+                    ]
+                }
+            },
+            {
+                "label": "organism",
+                "description": "Structure must belong to a protein from fruit fly, mouse, or human",
+                "parameters": {
+                    "attribute": "rcsb_entity_source_organism.taxonomy_lineage.name",
+                    "operator": "in",
+                    "value": [
+                        "Drosophila melanogaster",
+                        "Mus musculus",
+                        "Homo sapiens"
+                    ]
+                }
+            },
+            {
+                "label": "acquisition",
+                "description": "Structure must be acquired using electron microscopy (EM)",
+                "parameters": {
+                    "attribute": "exptl.method",
+                    "operator": "exact_match",
+                    "value": "ELECTRON MICROSCOPY"
+                }
+            },
+            {
+                "label": "resolution",
+                "description": "Structure must have a resolution of 3.5 Å or better",
+                "parameters": {
+                    "attribute": "rcsb_entry_info.resolution_combined",
+                    "operator": "less_or_equal",
+                    "value": 4.0
+                }
+            },
+            {
+                "label": "journal",
+                "description": "Structure must be published in the journal 'Nature Structural & Molecular Biology'",
+                "parameters": {
+                    "attribute": "rcsb_primary_citation.rcsb_journal_abbrev",
+                    "operator": "in",
+                    "value": [
+                        "Nat Struct Mol Biol"
+                    ]
+                }
+            },
+            {
+                "label": "composition",
+                "description": "Structure must be composed of either heteromeric or homomeric proteins",
+                "parameters": {
+                    "attribute": "rcsb_entry_info.polymer_composition",
+                    "operator": "in",
+                    "value": [
+                        "heteromeric protein",
+                        "homomeric protein"
+                    ]
+                }
+            },
+            {
+                "label": "multimericity",
+                "description": "Structure must belong to a monomeric protein",
+                "parameters": {
+                    "attribute": "rcsb_entry_info.deposited_polymer_entity_instance_count",
+                    "operator": "equals",
+                    "value": 1
+                }
+            }
+        ],
+        "expression": "membrane & organism & acquisition & resolution & composition & multimericity"
+    },
+    "data": {
+        "rcsb": "src/curate/rcsb.gql",
+        "pdbe": ["residues"],
+        "pdb": "results/structure/",
+        "tm": "results/simulation/"
+    }
+}

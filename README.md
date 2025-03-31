@@ -40,3 +40,12 @@ Pre-selection pipeline:
 - crop to 512 residues
 - do 12 designs and then extend
 - hotspots - hydrophobic patches, first run without hotspots and then close in on hotspots
+
+
+color 0x0053D7, b < 1.0
+color 0x57CAF9, b < 0.9
+color 0xFFDB12, b < 0.7
+color 0xFF7E45, b < 0.5
+color gray, b < 0.0
+
+curl -X POST --data "KVFGRCELAAAMKRHGLDNYRGYSLGNWVCAAKFESNFNTQATNRNTDGSTDYGILQINSRWWCNDGRTPGSRNLCNIPCSALLSSDITASVXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXNCAKKIVSDGNGMNAWVAWRNRCKGTDVQAWIRGCRL" https://api.esmatlas.com/foldSequence/v1/pdb/

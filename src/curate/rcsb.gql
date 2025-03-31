@@ -1,0 +1,53 @@
+query($ids: [String!]!) {
+    entries(entry_ids: $ids) {
+        struct {
+            title
+        }
+        entry {
+            id
+        }
+        citation {
+            pdbx_database_id_DOI
+        }
+        polymer_entities {
+            entity_poly {
+                pdbx_seq_one_letter_code_can
+                rcsb_sample_sequence_length
+            }
+            rcsb_polymer_entity_container_identifiers {
+                entity_id
+                asym_ids
+                auth_asym_ids
+                uniprot_ids
+            }
+            rcsb_polymer_entity_annotation {
+                type
+                annotation_id
+            }
+            rcsb_polymer_entity_feature {
+                type
+                name
+                feature_id
+                feature_positions {
+                    beg_seq_id
+                    end_seq_id
+                    values
+                }
+            }
+        }
+#       uniprots {
+#           rcsb_uniprot_accession
+#           rcsb_uniprot_feature {
+#               description
+#               type
+#               feature_positions {
+#                   beg_seq_id
+#                   end_seq_id
+#               }
+#           }
+#           rcsb_uniprot_protein {
+#               sequence
+#           }
+#       }
+    }
+}
